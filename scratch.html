@@ -1,92 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Masters Tournament</title>
-  <link rel="stylesheet" href="scratch.css">
+  <link rel="stylesheet" href="scratch.css" />
 </head>
-
 <body>
+  <div class="page-wrapper">
 
-  <div class="header">
-    <h1 id="top">The Masters Tournament</h1>
-    <p>Tradition. Excellence. Augusta National.</p>
+    <header class="hero-box" id="top">
+      <div class="hero-overlay">
+        <p class="eyebrow">Golf’s Most Iconic Tradition</p>
+        <h1>The Masters Tournament</h1>
+        <p class="intro-text">
+          The Masters stands out because of Augusta National, the green jacket, and the history that
+          seems to show up every April. It feels different from every other golf event, and that is
+          exactly why it matters so much.
+        </p>
+
+        <div class="nav-links">
+          <a href="index.html">Back to Home</a>
+          <a href="app.html">Play Trivia Game</a>
+          <a href="#history">Jump to History</a>
+          <a href="#stats">Jump to Data</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="content-box image-section">
+      <div class="text-column">
+        <h2>2025 Champion Moment</h2>
+        <p>
+          Rory McIlroy’s win at the 2025 Masters added another unforgettable chapter to the event’s
+          history. The tournament always feels larger than one weekend because every winner becomes
+          part of a tradition that fans remember for years.
+        </p>
+      </div>
+
+      <div class="image-column">
+        <img src="masters.jpg" alt="Rory McIlroy winning the 2025 Masters" class="feature-image" />
+      </div>
+    </section>
+
+    <section class="content-box" id="history">
+      <h2>Why the Masters Is Special</h2>
+      <p>
+        Part of what makes the Masters different is that it blends competition with tradition in a
+        way no other tournament really does.
+      </p>
+
+      <ol class="tips-list">
+        <li>
+          Traditions
+          <ul>
+            <li>Green Jacket ceremony</li>
+            <li>Champions Dinner</li>
+            <li>Par 3 Contest</li>
+          </ul>
+        </li>
+        <li>
+          Course identity
+          <ul>
+            <li>Amen Corner</li>
+            <li>Rae’s Creek</li>
+            <li>Azaleas and iconic scenery</li>
+          </ul>
+        </li>
+        <li>
+          History
+          <ul>
+            <li>Legendary champions</li>
+            <li>Sunday pressure</li>
+            <li>Moments fans remember for decades</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section class="content-box" id="video">
+      <h2>Iconic Masters Highlight</h2>
+      <p>
+        Tiger Woods’ 2001 win is one of the most memorable Masters moments and captures the pressure
+        and prestige that define Augusta.
+      </p>
+
+      <div class="video-box">
+        <iframe
+          src="https://www.youtube.com/embed/yJGjNsEiqbU"
+          title="Tiger Woods 2001 Masters"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <section class="content-box" id="stats">
+      <h2>Masters Data Visualization</h2>
+      <p>
+        This live Tableau visualization adds an interactive data element to the page and highlights
+        how much history is tied to the tournament.
+      </p>
+
+      <div class="tableau-wrapper">
+        <div class="tableauPlaceholder" id="viz1775850302695">
+          <noscript>
+            <a href="#">
+              <img
+                alt="Masters visualization"
+                src="https://public.tableau.com/static/images/S6/S6RHHK324/1_rss.png"
+                class="tableau-fallback"
+              />
+            </a>
+          </noscript>
+
+          <object class="tableauViz">
+            <param name="host_url" value="https://public.tableau.com/" />
+            <param name="path" value="shared/S6RHHK324" />
+            <param name="toolbar" value="yes" />
+            <param name="tabs" value="no" />
+          </object>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-box footer-links">
+      <h2>Explore More</h2>
+      <div class="nav-links">
+        <a href="app.html">Open Trivia Game</a>
+        <a href="#top">Back to Top</a>
+        <a href="index.html">Return Home</a>
+      </div>
+    </section>
   </div>
 
-  <!-- Navigation -->
-  <div class="nav">
-    <a href="index.html">Home</a>
-    <a href="app.html">Trivia Game</a>
-    <a href="#history">History</a>
-    <a href="#video">Highlight</a>
-  </div>
+  <script type="text/javascript">
+    const divElement = document.getElementById("viz1775850302695");
+    const vizElement = divElement.getElementsByTagName("object")[0];
+    vizElement.style.width = "100%";
+    vizElement.style.height = "850px";
 
-  <!-- Image -->
-  <div class="section">
-    <h2>2025 Champion Moment</h2>
-    <img src="masters.jpg" alt="Rory Masters Win" class="main-img">
-  </div>
-
-  <!-- List -->
-  <div class="section" id="history">
-    <h2>Why the Masters is Special</h2>
-
-    <ol>
-      <li>Traditions
-        <ul>
-          <li>Green Jacket</li>
-          <li>Champions Dinner</li>
-          <li>Par 3 Contest</li>
-        </ul>
-      </li>
-      <li>Course Features
-        <ul>
-          <li>Amen Corner</li>
-          <li>Rae’s Creek</li>
-          <li>Azalea-lined fairways</li>
-        </ul>
-      </li>
-    </ol>
-  </div>
-
-  <!-- Video -->
-  <div class="section" id="video">
-    <h2>Iconic Masters Moment</h2>
-
-    <iframe width="560" height="315"
-      src="https://www.youtube.com/embed/yJGjNsEiqbU"
-      title="Masters Highlight"
-      frameborder="0"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-  <!-- Tableau -->
-  <div class="section">
-    <h2>Masters Data Visualization</h2>
-
-    <div class='tableauPlaceholder' id='viz1775850302695'>
-      <noscript>
-        <a href='#'>
-          <img alt='Masters'
-          src='https://public.tableau.com/static/images/S6/S6RHHK324/1_rss.png' />
-        </a>
-      </noscript>
-
-      <object class='tableauViz'>
-        <param name='host_url' value='https://public.tableau.com/' />
-        <param name='path' value='shared/S6RHHK324' />
-        <param name='toolbar' value='yes' />
-      </object>
-    </div>
-
-    <script src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
-  </div>
-
-  <!-- Back to top -->
-  <div class="section">
-    <a href="#top">Back to Top</a>
-  </div>
-
+    const scriptElement = document.createElement("script");
+    scriptElement.src = "https://public.tableau.com/javascripts/api/viz_v1.js";
+    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+  </script>
 </body>
 </html>
