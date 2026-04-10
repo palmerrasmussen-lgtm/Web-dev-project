@@ -5,127 +5,316 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Masters Trivia Game</title>
   <style>
+    :root {
+      --masters-green: #0f3b24;
+      --masters-green-2: #1f6b3a;
+      --masters-light: #f6f3e8;
+      --masters-cream: #fbf8ef;
+      --masters-gold: #c8a96b;
+      --masters-text: #1f2a22;
+      --masters-soft: #dfe8dc;
+      --masters-border: #d8d2bf;
+      --correct-bg: #e4f4e7;
+      --correct-border: #2f7a38;
+      --wrong-bg: #f8e3e3;
+      --wrong-border: #b63b3b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(to bottom, #e8f5e9, #cfe8cf);
-      color: #1d2b1d;
+      color: var(--masters-text);
+      background:
+        linear-gradient(rgba(15, 59, 36, 0.78), rgba(15, 59, 36, 0.78)),
+        url("https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1600&q=80")
+        center/cover fixed no-repeat;
     }
 
     .app-container {
-<img src="https://upload.wikimedia.org/wikipedia/en/8/8c/Masters_Tournament_logo.png" style="width:100px; display:block; margin:0 auto 15px;">
-      max-width: 850px;
-      margin: 50px auto;
-      background-color: white;
-      padding: 30px;
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      max-width: 920px;
+      margin: 40px auto;
+      background: rgba(251, 248, 239, 0.97);
+      padding: 0;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
-    h1, h2 {
+    .app-hero {
+      background: linear-gradient(135deg, var(--masters-green), var(--masters-green-2));
+      color: white;
+      padding: 36px 32px 30px;
       text-align: center;
+      border-bottom: 4px solid var(--masters-gold);
     }
 
-    p {
-      text-align: center;
-      line-height: 1.6;
+    .app-logo {
+      width: 90px;
+      display: block;
+      margin: 0 auto 14px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    }
+
+    .app-hero h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      letter-spacing: 0.3px;
+    }
+
+    .app-hero p {
+      margin: 12px auto 0;
+      max-width: 680px;
+      line-height: 1.7;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .score-note {
+      font-size: 0.95rem;
+      color: #eef6ef;
+      margin-top: 10px;
+    }
+
+    .content-wrap {
+      padding: 30px 28px 34px;
     }
 
     .question-box {
-      margin-top: 25px;
-      padding: 20px;
-      background-color: #f4fbf4;
-      border-left: 6px solid #2f7a38;
-      border-radius: 10px;
+      margin-top: 22px;
+      padding: 22px 20px;
+      background: white;
+      border: 1px solid var(--masters-border);
+      border-left: 6px solid var(--masters-gold);
+      border-radius: 16px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
     }
 
     .question-box h3 {
-      margin-top: 0;
+      margin: 0 0 10px;
+      color: var(--masters-green);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
     }
 
-    .submit-btn, .restart-btn {
-      width: 100%;
-      padding: 14px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      background-color: #2f7a38;
-      color: white;
-      font-weight: bold;
+    .question-text {
+      text-align: left;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    label.option-label {
+      display: block;
+      margin: 10px 0;
+      text-align: left;
       cursor: pointer;
-      margin-top: 20px;
+      background: var(--masters-cream);
+      border: 1px solid #e4ddca;
+      border-radius: 12px;
+      padding: 12px 14px;
+      transition: all 0.18s ease;
     }
 
-    .submit-btn:hover, .restart-btn:hover {
-      background-color: #25602c;
+    label.option-label:hover {
+      background: #f1ecdc;
+      border-color: var(--masters-gold);
+      transform: translateX(2px);
+    }
+
+    label.option-label.correct {
+      background: var(--correct-bg);
+      border: 2px solid var(--correct-border);
+      color: #1e4f28;
+      font-weight: 700;
+    }
+
+    label.option-label.incorrect {
+      background: var(--wrong-bg);
+      border: 2px solid var(--wrong-border);
+      color: #7d2222;
+      font-weight: 700;
+    }
+
+    label.option-label.dimmed {
+      opacity: 0.85;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+      accent-color: var(--masters-green-2);
+    }
+
+    .answer-note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      display: none;
+    }
+
+    .answer-note.correct-note {
+      display: block;
+      background: var(--correct-bg);
+      color: #1d4d27;
+      border: 1px solid #b8d7be;
+    }
+
+    .answer-note.incorrect-note {
+      display: block;
+      background: var(--wrong-bg);
+      color: #7d2222;
+      border: 1px solid #e0b6b6;
+    }
+
+    .submit-btn,
+    .restart-btn {
+      width: 100%;
+      padding: 15px;
+      font-size: 1rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(to right, var(--masters-green), var(--masters-green-2));
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 24px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 10px 22px rgba(15, 59, 36, 0.18);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .submit-btn:hover,
+    .restart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px rgba(15, 59, 36, 0.25);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: 0 10px 22px rgba(15, 59, 36, 0.18);
     }
 
     .result-box {
-      margin-top: 30px;
-      padding: 20px;
-      background-color: #f4fbf4;
-      border-left: 6px solid #2f7a38;
-      border-radius: 10px;
+      margin-top: 28px;
+      padding: 24px 20px;
+      background: linear-gradient(to bottom right, #f8f4e7, #f1ebda);
+      border: 1px solid #dfd5b8;
+      border-left: 6px solid var(--masters-gold);
+      border-radius: 18px;
       display: none;
       text-align: center;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .result-box h2 {
+      margin-top: 0;
+      color: var(--masters-green);
+    }
+
+    .result-box p {
+      margin-bottom: 0;
+      font-size: 1.05rem;
+      line-height: 1.7;
     }
 
     .back-links {
       text-align: center;
-      margin-top: 25px;
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .back-links a {
       display: inline-block;
-      margin: 8px;
-      padding: 10px 16px;
-      background-color: #a8dba8;
-      color: #163116;
+      padding: 11px 18px;
+      background: white;
+      color: var(--masters-green);
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid #d8d2bf;
+      transition: all 0.18s ease;
     }
 
     .back-links a:hover {
-      background-color: #92cb92;
+      background: var(--masters-green);
+      color: white;
+      border-color: var(--masters-green);
     }
 
-    label {
-      display: block;
-      margin: 8px 0;
-      text-align: left;
-    }
+    @media (max-width: 700px) {
+      .app-container {
+        margin: 18px 12px;
+      }
 
-    input[type="radio"] {
-      margin-right: 8px;
+      .app-hero {
+        padding: 28px 20px 24px;
+      }
+
+      .app-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .content-wrap {
+        padding: 22px 18px 26px;
+      }
+
+      .question-box {
+        padding: 18px 16px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="app-container">
-    <h1>Masters Trivia Game</h1>
-    <p>
-      Test your knowledge of one of golf’s most iconic tournaments.
-    </p>
-
-    <div id="quizArea"></div>
-
-    <button class="submit-btn" onclick="checkAnswers()">Submit Answers</button>
-
-    <div class="result-box" id="resultBox">
-      <h2>Your Score</h2>
-      <p id="resultText"></p>
-      <button class="restart-btn" onclick="restartQuiz()">Play Again</button>
+    <div class="app-hero">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/en/8/8c/Masters_Tournament_logo.png"
+        alt="Masters logo"
+        class="app-logo"
+      >
+      <h1>Masters Trivia Game</h1>
+      <p>
+        Test your knowledge of one of golf’s most iconic tournaments with a quiz built around
+        Augusta traditions, famous holes, and Masters history.
+      </p>
+      <p class="score-note">
+        Each game pulls 10 random questions from a larger Masters question pool.
+      </p>
     </div>
 
-    <div class="back-links">
-      <a href="scratch.html">Back to Scratch Page</a>
-      <a href="index.html">Back to Professional Home</a>
+    <div class="content-wrap">
+      <div id="quizArea"></div>
+
+      <button class="submit-btn" id="submitBtn" onclick="checkAnswers()">Submit Answers</button>
+
+      <div class="result-box" id="resultBox">
+        <h2>Your Score</h2>
+        <p id="resultText"></p>
+        <button class="restart-btn" onclick="restartQuiz()">Play Again</button>
+      </div>
+
+      <div class="back-links">
+        <a href="scratch.html">Back to Scratch Page</a>
+        <a href="index.html">Back to Professional Home</a>
+      </div>
     </div>
   </div>
 
   <script>
-    const questions = [
+    const questionPool = [
       {
         question: "Where is the Masters Tournament played?",
         options: ["Pebble Beach", "Augusta National", "St. Andrews", "Torrey Pines"],
@@ -133,7 +322,7 @@
       },
       {
         question: "What is awarded to the winner of the Masters?",
-        options: ["Claret Jug", "Wanamak­er Trophy", "Green Jacket", "Ryder Cup"],
+        options: ["Claret Jug", "Wanamaker Trophy", "Green Jacket", "Ryder Cup"],
         answer: "Green Jacket"
       },
       {
@@ -150,21 +339,147 @@
         question: "Which month is the Masters usually played in?",
         options: ["February", "April", "June", "September"],
         answer: "April"
+      },
+      {
+        question: "What color is the jacket awarded to the Masters champion?",
+        options: ["Black", "White", "Green", "Gold"],
+        answer: "Green"
+      },
+      {
+        question: "What contest is traditionally held during Masters week before the tournament begins?",
+        options: ["Long Drive Contest", "Par 3 Contest", "Skills Challenge", "Closest to the Pin Classic"],
+        answer: "Par 3 Contest"
+      },
+      {
+        question: "Who is allowed to host the Champions Dinner menu?",
+        options: ["The tournament director", "The defending champion", "The lowest amateur", "The oldest past winner"],
+        answer: "The defending champion"
+      },
+      {
+        question: "What is the name of the body of water by the 16th hole at Augusta National?",
+        options: ["Rae’s Creek", "Jordan Lake", "Hogan Pond", "Founders Water"],
+        answer: "Rae’s Creek"
+      },
+      {
+        question: "Which nine at Augusta contains Amen Corner?",
+        options: ["Front nine", "Back nine", "Practice nine", "Short course"],
+        answer: "Back nine"
+      },
+      {
+        question: "What hole begins Amen Corner?",
+        options: ["10", "11", "12", "13"],
+        answer: "11"
+      },
+      {
+        question: "What hole is famous for its short par-3 over water in Amen Corner?",
+        options: ["11", "12", "13", "16"],
+        answer: "12"
+      },
+      {
+        question: "How many rounds are played in the Masters Tournament?",
+        options: ["2", "3", "4", "5"],
+        answer: "4"
+      },
+      {
+        question: "How many holes are played in a standard Masters round?",
+        options: ["9", "12", "18", "27"],
+        answer: "18"
+      },
+      {
+        question: "What usually happens after the second round of the Masters?",
+        options: ["A playoff", "The cut", "The jacket ceremony", "The Champions Dinner"],
+        answer: "The cut"
+      },
+      {
+        question: "Which group is especially known for competing at the Masters each year?",
+        options: ["College teams", "International amateurs only", "Past champions", "Senior tour winners only"],
+        answer: "Past champions"
+      },
+      {
+        question: "What makes the Masters different from the other major championships?",
+        options: ["It is always played at the same course", "It has only 54 holes", "It allows teams", "It is match play"],
+        answer: "It is always played at the same course"
+      },
+      {
+        question: "Which famous golf course hosts the Masters every year?",
+        options: ["Augusta National", "Oakmont", "Pinehurst No. 2", "Bethpage Black"],
+        answer: "Augusta National"
+      },
+      {
+        question: "What is the final day of the Masters known for?",
+        options: ["Team scoring", "Sunday pressure and the green jacket ceremony", "Only amateur play", "A five-hole sprint"],
+        answer: "Sunday pressure and the green jacket ceremony"
+      },
+      {
+        question: "Which hole at Augusta is famous for players skipping the ball across the water in practice rounds?",
+        options: ["6", "12", "16", "18"],
+        answer: "16"
+      },
+      {
+        question: "What is one reason the Masters is considered especially traditional?",
+        options: ["It changes countries every year", "It keeps many long-standing customs", "It uses only hickory clubs", "It has no spectators"],
+        answer: "It keeps many long-standing customs"
+      },
+      {
+        question: "What is the term for playing holes 11, 12, and 13 at Augusta?",
+        options: ["Golden Triangle", "Champions Loop", "Amen Corner", "Green Mile"],
+        answer: "Amen Corner"
+      },
+      {
+        question: "Which of these is most associated with the Masters?",
+        options: ["Yellow belt", "Green jacket", "Silver cap", "Blue ribbon"],
+        answer: "Green jacket"
+      },
+      {
+        question: "Who receives low amateur honors at the Masters?",
+        options: ["Best amateur in the field", "Youngest player in the field", "Best rookie", "Fastest round of the week"],
+        answer: "Best amateur in the field"
+      },
+      {
+        question: "The Masters is one of golf’s four what?",
+        options: ["Invitationals", "Classics", "Majors", "FedEx events"],
+        answer: "Majors"
       }
     ];
 
-    function loadQuiz() {
-      const quizArea = document.getElementById("quizArea");
-      quizArea.innerHTML = "";
+    const QUESTIONS_PER_GAME = 10;
+    let currentQuestions = [];
+    let quizSubmitted = false;
 
-      questions.forEach((q, index) => {
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    function getRandomQuestions() {
+      return shuffleArray(questionPool).slice(0, QUESTIONS_PER_GAME).map(q => ({
+        ...q,
+        shuffledOptions: shuffleArray(q.options)
+      }));
+    }
+
+    function loadQuiz() {
+      quizSubmitted = false;
+      currentQuestions = getRandomQuestions();
+
+      const quizArea = document.getElementById("quizArea");
+      const submitBtn = document.getElementById("submitBtn");
+
+      quizArea.innerHTML = "";
+      submitBtn.disabled = false;
+
+      currentQuestions.forEach((q, index) => {
         const questionBlock = document.createElement("div");
         questionBlock.className = "question-box";
 
         let optionsHTML = "";
-        q.options.forEach(option => {
+        q.shuffledOptions.forEach((option, optionIndex) => {
           optionsHTML += `
-            <label>
+            <label class="option-label" data-question="${index}" data-option="${option}">
               <input type="radio" name="question${index}" value="${option}">
               ${option}
             </label>
@@ -173,35 +488,85 @@
 
         questionBlock.innerHTML = `
           <h3>Question ${index + 1}</h3>
-          <p style="text-align:left;"><strong>${q.question}</strong></p>
+          <div class="question-text">${q.question}</div>
           ${optionsHTML}
+          <div class="answer-note" id="note${index}"></div>
         `;
 
         quizArea.appendChild(questionBlock);
       });
+
+      document.getElementById("resultBox").style.display = "none";
     }
 
     function checkAnswers() {
+      if (quizSubmitted) return;
+
       let score = 0;
 
-      questions.forEach((q, index) => {
+      currentQuestions.forEach((q, index) => {
         const selected = document.querySelector(`input[name="question${index}"]:checked`);
+        const allInputs = document.querySelectorAll(`input[name="question${index}"]`);
+        const allLabels = document.querySelectorAll(`label[data-question="${index}"]`);
+        const note = document.getElementById(`note${index}`);
+
+        allInputs.forEach(input => {
+          input.disabled = true;
+        });
+
+        allLabels.forEach(label => {
+          const labelOption = label.getAttribute("data-option");
+          label.classList.add("dimmed");
+
+          if (labelOption === q.answer) {
+            label.classList.remove("dimmed");
+            label.classList.add("correct");
+          }
+
+          if (selected && labelOption === selected.value && selected.value !== q.answer) {
+            label.classList.remove("dimmed");
+            label.classList.add("incorrect");
+          }
+        });
+
         if (selected && selected.value === q.answer) {
           score++;
+          note.className = "answer-note correct-note";
+          note.textContent = "Correct.";
+        } else if (selected) {
+          note.className = "answer-note incorrect-note";
+          note.textContent = `Incorrect. The correct answer is ${q.answer}.`;
+        } else {
+          note.className = "answer-note incorrect-note";
+          note.textContent = `No answer selected. The correct answer is ${q.answer}.`;
         }
       });
 
       const resultBox = document.getElementById("resultBox");
       const resultText = document.getElementById("resultText");
+      const submitBtn = document.getElementById("submitBtn");
 
-      resultText.textContent = `You got ${score} out of ${questions.length} correct.`;
+      let feedback = "";
+      if (score === currentQuestions.length) {
+        feedback = "Perfect round. Very Masters-worthy.";
+      } else if (score >= 8) {
+        feedback = "Great score. You know your Masters history.";
+      } else if (score >= 5) {
+        feedback = "Solid round. A little more Augusta knowledge and you are there.";
+      } else {
+        feedback = "Good start. Time to study up and make another run at it.";
+      }
+
+      resultText.textContent = `You got ${score} out of ${currentQuestions.length} correct. ${feedback}`;
       resultBox.style.display = "block";
+      submitBtn.disabled = true;
+      quizSubmitted = true;
+
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }
 
     function restartQuiz() {
       loadQuiz();
-      document.getElementById("resultBox").style.display = "none";
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
