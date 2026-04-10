@@ -80,3 +80,20 @@ p {
   font-size: 17px;
   line-height: 1.7;
 }
+.logo {
+  width: 120px;
+  margin-bottom: 15px;
+}
+
+body {
+  background: linear-gradient(to bottom, #e8f5e9, #cfe8cf);
+}
+
+.feature-image {
+  width: 100%;
+  max-width: 750px;
+  margin: 20px auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
