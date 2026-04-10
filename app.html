@@ -28,7 +28,7 @@
       color: var(--masters-text);
       background:
         linear-gradient(rgba(10, 34, 18, 0.45), rgba(10, 34, 18, 0.45)),
-        url("https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1600&q=80")
+        url("https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=1600&q=80")
         center/cover fixed no-repeat;
     }
 
@@ -449,7 +449,9 @@
       const shuffled = [...array];
       for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        const temp = shuffled[i];
+        shuffled[i] = shuffled[j];
+        shuffled[j] = temp;
       }
       return shuffled;
     }
@@ -457,7 +459,7 @@
     function getStoredArray(key) {
       try {
         return JSON.parse(localStorage.getItem(key)) || [];
-      } catch {
+      } catch (e) {
         return [];
       }
     }
@@ -470,46 +472,51 @@
       let usedIds = getStoredArray(USED_STORAGE_KEY);
       const lastQuizIds = getStoredArray(LAST_QUIZ_STORAGE_KEY);
 
-      const neverUsed = questionPool.filter(q => !usedIds.includes(q.id));
+      const neverUsed = questionPool.filter(function(q) {
+        return !usedIds.includes(q.id);
+      });
+
       let selected = [];
 
       if (neverUsed.length >= QUESTIONS_PER_GAME) {
         selected = shuffleArray(neverUsed).slice(0, QUESTIONS_PER_GAME);
       } else {
-        selected = [...neverUsed];
+        selected = neverUsed.slice();
 
         const remainingNeeded = QUESTIONS_PER_GAME - selected.length;
 
-        let refillPool = questionPool.filter(
-          q => !selected.some(s => s.id === q.id) && !lastQuizIds.includes(q.id)
-        );
+        let refillPool = questionPool.filter(function(q) {
+          const alreadySelected = selected.some(function(s) { return s.id === q.id; });
+          return !alreadySelected && !lastQuizIds.includes(q.id);
+        });
 
         if (refillPool.length < remainingNeeded) {
-          refillPool = questionPool.filter(
-            q => !selected.some(s => s.id === q.id)
-          );
+          refillPool = questionPool.filter(function(q) {
+            return !selected.some(function(s) { return s.id === q.id; });
+          });
         }
 
-        selected = [
-          ...selected,
-          ...shuffleArray(refillPool).slice(0, remainingNeeded)
-        ];
+        selected = selected.concat(shuffleArray(refillPool).slice(0, remainingNeeded));
 
         if (neverUsed.length === 0) {
           usedIds = [];
         }
       }
 
-      const selectedIds = selected.map(q => q.id);
-      const updatedUsed = Array.from(new Set([...usedIds, ...selectedIds]));
+      const selectedIds = selected.map(function(q) { return q.id; });
+      const updatedUsed = Array.from(new Set(usedIds.concat(selectedIds)));
 
       setStoredArray(USED_STORAGE_KEY, updatedUsed);
       setStoredArray(LAST_QUIZ_STORAGE_KEY, selectedIds);
 
-      return selected.map(q => ({
-        ...q,
-        shuffledOptions: shuffleArray(q.options)
-      }));
+      return selected.map(function(q) {
+        return {
+          id: q.id,
+          question: q.question,
+          answer: q.answer,
+          shuffledOptions: shuffleArray(q.options)
+        };
+      });
     }
 
     function loadQuiz() {
@@ -518,31 +525,30 @@
 
       const quizArea = document.getElementById("quizArea");
       const submitBtn = document.getElementById("submitBtn");
+      const resultBox = document.getElementById("resultBox");
 
       quizArea.innerHTML = "";
       submitBtn.disabled = false;
-      document.getElementById("resultBox").style.display = "none";
+      resultBox.style.display = "none";
 
-      currentQuestions.forEach((q, index) => {
+      currentQuestions.forEach(function(q, index) {
         const questionBlock = document.createElement("div");
         questionBlock.className = "question-box";
 
         let optionsHTML = "";
-        q.shuffledOptions.forEach(option => {
-          optionsHTML += `
-            <label class="option-label" data-question="${index}" data-option="${option}">
-              <input type="radio" name="question${index}" value="${option}">
-              ${option}
-            </label>
-          `;
+        q.shuffledOptions.forEach(function(option) {
+          optionsHTML +=
+            '<label class="option-label" data-question="' + index + '" data-option="' + option + '">' +
+              '<input type="radio" name="question' + index + '" value="' + option + '">' +
+              option +
+            '</label>';
         });
 
-        questionBlock.innerHTML = `
-          <h3>Question ${index + 1}</h3>
-          <div class="question-text">${q.question}</div>
-          ${optionsHTML}
-          <div class="answer-note" id="note${index}"></div>
-        `;
+        questionBlock.innerHTML =
+          '<h3>Question ' + (index + 1) + '</h3>' +
+          '<div class="question-text">' + q.question + '</div>' +
+          optionsHTML +
+          '<div class="answer-note" id="note' + index + '"></div>';
 
         quizArea.appendChild(questionBlock);
       });
@@ -553,17 +559,17 @@
 
       let score = 0;
 
-      currentQuestions.forEach((q, index) => {
-        const selected = document.querySelector(\`input[name="question\${index}"]:checked\`);
-        const allInputs = document.querySelectorAll(\`input[name="question\${index}"]\`);
-        const allLabels = document.querySelectorAll(\`label[data-question="\${index}"]\`);
-        const note = document.getElementById(\`note\${index}\`);
+      currentQuestions.forEach(function(q, index) {
+        const selected = document.querySelector('input[name="question' + index + '"]:checked');
+        const allInputs = document.querySelectorAll('input[name="question' + index + '"]');
+        const allLabels = document.querySelectorAll('label[data-question="' + index + '"]');
+        const note = document.getElementById("note" + index);
 
-        allInputs.forEach(input => {
+        allInputs.forEach(function(input) {
           input.disabled = true;
         });
 
-        allLabels.forEach(label => {
+        allLabels.forEach(function(label) {
           const labelOption = label.getAttribute("data-option");
           label.classList.add("dimmed");
 
@@ -584,10 +590,10 @@
           note.textContent = "Correct.";
         } else if (selected) {
           note.className = "answer-note incorrect-note";
-          note.textContent = \`Incorrect. The correct answer is \${q.answer}.\`;
+          note.textContent = "Incorrect. The correct answer is " + q.answer + ".";
         } else {
           note.className = "answer-note incorrect-note";
-          note.textContent = \`No answer selected. The correct answer is \${q.answer}.\`;
+          note.textContent = "No answer selected. The correct answer is " + q.answer + ".";
         }
       });
 
@@ -606,7 +612,7 @@
         feedback = "Good start. Time to study up and make another run at it.";
       }
 
-      resultText.textContent = \`You got \${score} out of \${currentQuestions.length} correct. \${feedback}\`;
+      resultText.textContent = "You got " + score + " out of " + currentQuestions.length + " correct. " + feedback;
       resultBox.style.display = "block";
       submitBtn.disabled = true;
       quizSubmitted = true;
