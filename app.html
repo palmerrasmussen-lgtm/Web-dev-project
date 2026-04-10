@@ -8,11 +8,9 @@
     :root {
       --masters-green: #0f3b24;
       --masters-green-2: #1f6b3a;
-      --masters-light: #f6f3e8;
       --masters-cream: #fbf8ef;
       --masters-gold: #c8a96b;
       --masters-text: #1f2a22;
-      --masters-soft: #dfe8dc;
       --masters-border: #d8d2bf;
       --correct-bg: #e4f4e7;
       --correct-border: #2f7a38;
@@ -29,8 +27,8 @@
       font-family: Arial, Helvetica, sans-serif;
       color: var(--masters-text);
       background:
-        linear-gradient(rgba(15, 59, 36, 0.78), rgba(15, 59, 36, 0.78)),
-        url("https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1600&q=80")
+        linear-gradient(rgba(15, 59, 36, 0.68), rgba(15, 59, 36, 0.68)),
+        url("https://images.unsplash.com/photo-1592919505780-303950717480?auto=format&fit=crop&w=1600&q=80")
         center/cover fixed no-repeat;
     }
 
@@ -54,7 +52,8 @@
     }
 
     .app-logo {
-      width: 90px;
+      width: 95px;
+      max-width: 100%;
       display: block;
       margin: 0 auto 14px;
       filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
@@ -175,7 +174,8 @@
     }
 
     .submit-btn,
-    .restart-btn {
+    .restart-btn,
+    .reset-btn {
       width: 100%;
       padding: 15px;
       font-size: 1rem;
@@ -192,7 +192,8 @@
     }
 
     .submit-btn:hover,
-    .restart-btn:hover {
+    .restart-btn:hover,
+    .reset-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 14px 26px rgba(15, 59, 36, 0.25);
     }
@@ -254,6 +255,12 @@
       border-color: var(--masters-green);
     }
 
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
     @media (max-width: 700px) {
       .app-container {
         margin: 18px 12px;
@@ -274,6 +281,10 @@
       .question-box {
         padding: 18px 16px;
       }
+
+      .button-row {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -281,17 +292,16 @@
   <div class="app-container">
     <div class="app-hero">
       <img
-        src="https://upload.wikimedia.org/wikipedia/en/8/8c/Masters_Tournament_logo.png"
+        src="masters-logo.png"
         alt="Masters logo"
         class="app-logo"
       >
       <h1>Masters Trivia Game</h1>
       <p>
-        Test your knowledge of one of golf’s most iconic tournaments with a quiz built around
-        Augusta traditions, famous holes, and Masters history.
+        Test your knowledge of Augusta traditions, iconic holes, and Masters history.
       </p>
       <p class="score-note">
-        Each game pulls 10 random questions from a larger Masters question pool.
+        Each round pulls 10 fresh questions and avoids repeats from the previous rounds until the pool runs out.
       </p>
     </div>
 
@@ -303,7 +313,10 @@
       <div class="result-box" id="resultBox">
         <h2>Your Score</h2>
         <p id="resultText"></p>
-        <button class="restart-btn" onclick="restartQuiz()">Play Again</button>
+        <div class="button-row">
+          <button class="restart-btn" onclick="restartQuiz()">Play Again</button>
+          <button class="reset-btn" onclick="resetQuestionHistory()">Reset Question Cycle</button>
+        </div>
       </div>
 
       <div class="back-links">
@@ -314,137 +327,139 @@
   </div>
 
   <script>
+    const STORAGE_KEY = "mastersUsedQuestionIds";
+    const QUESTIONS_PER_GAME = 10;
+    let currentQuestions = [];
+    let quizSubmitted = false;
+
     const questionPool = [
       {
+        id: "location",
         question: "Where is the Masters Tournament played?",
         options: ["Pebble Beach", "Augusta National", "St. Andrews", "Torrey Pines"],
         answer: "Augusta National"
       },
       {
+        id: "winner-prize",
         question: "What is awarded to the winner of the Masters?",
         options: ["Claret Jug", "Wanamaker Trophy", "Green Jacket", "Ryder Cup"],
         answer: "Green Jacket"
       },
       {
+        id: "amen-corner-name",
         question: "What famous stretch of holes at Augusta is especially well known?",
         options: ["Bear Trap", "Snake Pit", "Amen Corner", "Murderers’ Row"],
         answer: "Amen Corner"
       },
       {
+        id: "champions-dinner",
         question: "What special dinner is held for past Masters champions?",
         options: ["Legends Dinner", "Champions Dinner", "Augusta Banquet", "Winners Feast"],
         answer: "Champions Dinner"
       },
       {
+        id: "month",
         question: "Which month is the Masters usually played in?",
         options: ["February", "April", "June", "September"],
         answer: "April"
       },
       {
-        question: "What color is the jacket awarded to the Masters champion?",
-        options: ["Black", "White", "Green", "Gold"],
-        answer: "Green"
-      },
-      {
+        id: "par-3",
         question: "What contest is traditionally held during Masters week before the tournament begins?",
         options: ["Long Drive Contest", "Par 3 Contest", "Skills Challenge", "Closest to the Pin Classic"],
         answer: "Par 3 Contest"
       },
       {
-        question: "Who is allowed to host the Champions Dinner menu?",
+        id: "dinner-host",
+        question: "Who is allowed to choose the Champions Dinner menu?",
         options: ["The tournament director", "The defending champion", "The lowest amateur", "The oldest past winner"],
         answer: "The defending champion"
       },
       {
-        question: "What is the name of the body of water by the 16th hole at Augusta National?",
+        id: "raes-creek",
+        question: "What is the name of the body of water associated with Augusta National and Amen Corner?",
         options: ["Rae’s Creek", "Jordan Lake", "Hogan Pond", "Founders Water"],
         answer: "Rae’s Creek"
       },
       {
+        id: "amen-corner-nine",
         question: "Which nine at Augusta contains Amen Corner?",
         options: ["Front nine", "Back nine", "Practice nine", "Short course"],
         answer: "Back nine"
       },
       {
+        id: "amen-corner-start",
         question: "What hole begins Amen Corner?",
         options: ["10", "11", "12", "13"],
         answer: "11"
       },
       {
+        id: "famous-par3",
         question: "What hole is famous for its short par-3 over water in Amen Corner?",
         options: ["11", "12", "13", "16"],
         answer: "12"
       },
       {
+        id: "rounds",
         question: "How many rounds are played in the Masters Tournament?",
         options: ["2", "3", "4", "5"],
         answer: "4"
       },
       {
+        id: "holes-per-round",
         question: "How many holes are played in a standard Masters round?",
         options: ["9", "12", "18", "27"],
         answer: "18"
       },
       {
+        id: "the-cut",
         question: "What usually happens after the second round of the Masters?",
         options: ["A playoff", "The cut", "The jacket ceremony", "The Champions Dinner"],
         answer: "The cut"
       },
       {
-        question: "Which group is especially known for competing at the Masters each year?",
+        id: "past-champions",
+        question: "Which group is especially known for returning to compete at the Masters?",
         options: ["College teams", "International amateurs only", "Past champions", "Senior tour winners only"],
         answer: "Past champions"
       },
       {
+        id: "same-course",
         question: "What makes the Masters different from the other major championships?",
         options: ["It is always played at the same course", "It has only 54 holes", "It allows teams", "It is match play"],
         answer: "It is always played at the same course"
       },
       {
-        question: "Which famous golf course hosts the Masters every year?",
-        options: ["Augusta National", "Oakmont", "Pinehurst No. 2", "Bethpage Black"],
-        answer: "Augusta National"
-      },
-      {
-        question: "What is the final day of the Masters known for?",
+        id: "final-day",
+        question: "What is the final day of the Masters especially known for?",
         options: ["Team scoring", "Sunday pressure and the green jacket ceremony", "Only amateur play", "A five-hole sprint"],
         answer: "Sunday pressure and the green jacket ceremony"
       },
       {
+        id: "skip-water",
         question: "Which hole at Augusta is famous for players skipping the ball across the water in practice rounds?",
         options: ["6", "12", "16", "18"],
         answer: "16"
       },
       {
+        id: "tradition",
         question: "What is one reason the Masters is considered especially traditional?",
         options: ["It changes countries every year", "It keeps many long-standing customs", "It uses only hickory clubs", "It has no spectators"],
         answer: "It keeps many long-standing customs"
       },
       {
-        question: "What is the term for playing holes 11, 12, and 13 at Augusta?",
-        options: ["Golden Triangle", "Champions Loop", "Amen Corner", "Green Mile"],
-        answer: "Amen Corner"
-      },
-      {
-        question: "Which of these is most associated with the Masters?",
-        options: ["Yellow belt", "Green jacket", "Silver cap", "Blue ribbon"],
-        answer: "Green jacket"
-      },
-      {
+        id: "low-amateur",
         question: "Who receives low amateur honors at the Masters?",
         options: ["Best amateur in the field", "Youngest player in the field", "Best rookie", "Fastest round of the week"],
         answer: "Best amateur in the field"
       },
       {
+        id: "majors",
         question: "The Masters is one of golf’s four what?",
         options: ["Invitationals", "Classics", "Majors", "FedEx events"],
         answer: "Majors"
       }
     ];
-
-    const QUESTIONS_PER_GAME = 10;
-    let currentQuestions = [];
-    let quizSubmitted = false;
 
     function shuffleArray(array) {
       const shuffled = [...array];
@@ -455,16 +470,47 @@
       return shuffled;
     }
 
-    function getRandomQuestions() {
-      return shuffleArray(questionPool).slice(0, QUESTIONS_PER_GAME).map(q => ({
-        ...q,
-        shuffledOptions: shuffleArray(q.options)
-      }));
+    function getUsedQuestionIds() {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) return [];
+      try {
+        return JSON.parse(stored);
+      } catch {
+        return [];
+      }
+    }
+
+    function setUsedQuestionIds(ids) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+    }
+
+    function getFreshQuestionSet() {
+      let usedIds = getUsedQuestionIds();
+
+      let availableQuestions = questionPool.filter(q => !usedIds.includes(q.id));
+
+      if (availableQuestions.length < QUESTIONS_PER_GAME) {
+        usedIds = [];
+        setUsedQuestionIds([]);
+        availableQuestions = [...questionPool];
+      }
+
+      const selectedQuestions = shuffleArray(availableQuestions)
+        .slice(0, QUESTIONS_PER_GAME)
+        .map(q => ({
+          ...q,
+          shuffledOptions: shuffleArray(q.options)
+        }));
+
+      const updatedUsedIds = [...usedIds, ...selectedQuestions.map(q => q.id)];
+      setUsedQuestionIds(updatedUsedIds);
+
+      return selectedQuestions;
     }
 
     function loadQuiz() {
       quizSubmitted = false;
-      currentQuestions = getRandomQuestions();
+      currentQuestions = getFreshQuestionSet();
 
       const quizArea = document.getElementById("quizArea");
       const submitBtn = document.getElementById("submitBtn");
@@ -477,7 +523,7 @@
         questionBlock.className = "question-box";
 
         let optionsHTML = "";
-        q.shuffledOptions.forEach((option, optionIndex) => {
+        q.shuffledOptions.forEach((option) => {
           optionsHTML += `
             <label class="option-label" data-question="${index}" data-option="${option}">
               <input type="radio" name="question${index}" value="${option}">
@@ -568,6 +614,11 @@
     function restartQuiz() {
       loadQuiz();
       window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function resetQuestionHistory() {
+      localStorage.removeItem(STORAGE_KEY);
+      restartQuiz();
     }
 
     loadQuiz();

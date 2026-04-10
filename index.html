@@ -1,49 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Palmer Rasmussen | Portfolio</title>
 
   <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     body {
-      background-color: #f5f7f5;
+      background-color: #f4f7f2;
+      color: #1b2a1f;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .navbar {
+      background-color: #102a16;
+    }
+
+    .navbar a {
+      color: white !important;
+      font-weight: 600;
     }
 
     .hero {
-      background-color: #2f7a38;
+      background: linear-gradient(rgba(16,42,22,0.8), rgba(16,42,22,0.8)),
+        url("https://images.unsplash.com/photo-1517486808906-6ca8b3f04846")
+        center/cover no-repeat;
       color: white;
-      padding: 60px 20px;
+      padding: 100px 20px;
       text-align: center;
     }
 
+    .hero h1 {
+      font-weight: 800;
+    }
+
+    .btn-custom {
+      background-color: #2f7a38;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: bold;
+    }
+
+    .btn-custom:hover {
+      background-color: #245e2c;
+    }
+
     .section {
-      padding: 40px 20px;
+      padding: 60px 20px;
+    }
+
+    .card {
+      border-radius: 16px;
+      border: none;
+      transition: 0.2s;
     }
 
     .card:hover {
-      transform: scale(1.02);
-      transition: 0.2s;
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    footer {
+      background-color: #102a16;
+      color: white;
+      text-align: center;
+      padding: 20px;
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand text-white" href="index.html">Palmer Rasmussen</a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="scratch.html">Masters Page</a>
+        <a class="nav-link" href="app.html">Trivia Game</a>
+        <a class="nav-link" href="resume.html">Résumé</a>
+      </div>
+    </div>
+  </nav>
+
   <!-- HERO -->
   <div class="hero">
-    <h1 class="display-4">Palmer Rasmussen</h1>
-    <p class="lead">Student | Business Analytics | Web Development Project</p>
+    <h1>Professional Portfolio</h1>
+    <p>
+      A custom web project featuring the Masters Tournament, an interactive trivia game,
+      and a fully built HTML résumé.
+    </p>
+    <br>
+    <a href="scratch.html" class="btn btn-custom">Masters Page</a>
+    <a href="app.html" class="btn btn-custom">Play Trivia</a>
+    <a href="resume.html" class="btn btn-custom">View Résumé</a>
   </div>
 
   <!-- ABOUT -->
   <div class="container section">
     <h2>About Me</h2>
     <p>
-      I am a student interested in analytics, business strategy, and technology.
-      This website showcases my work for a web development project, including a custom-built page and an interactive app.
+      I am a student focused on business analytics, marketing, and technology.
+      This site demonstrates both professional design and hands-on coding skills,
+      including HTML, CSS, and JavaScript.
     </p>
   </div>
 
@@ -51,21 +114,29 @@
   <div class="container section">
     <h2>Projects</h2>
 
-    <div class="row">
+    <div class="row g-4">
 
+      <!-- Masters Page -->
       <div class="col-md-6">
-        <div class="card p-3 shadow-sm">
-          <h4>Golf Scratch Page</h4>
-          <p>A custom HTML/CSS page about golf, including embedded media and data visualization.</p>
-          <a href="scratch.html" class="btn btn-success">View Page</a>
+        <div class="card p-4 shadow-sm">
+          <h4>Masters Tournament Page</h4>
+          <p>
+            A custom HTML and CSS page exploring the history, traditions,
+            and visuals of the Masters Tournament.
+          </p>
+          <a href="scratch.html" class="btn btn-custom">Open Page</a>
         </div>
       </div>
 
+      <!-- Trivia App -->
       <div class="col-md-6">
-        <div class="card p-3 shadow-sm">
-          <h4>Golf Practice App</h4>
-          <p>An interactive tool that generates a personalized golf practice plan.</p>
-          <a href="app.html" class="btn btn-success">Try App</a>
+        <div class="card p-4 shadow-sm">
+          <h4>Masters Trivia Game</h4>
+          <p>
+            An interactive quiz app with randomized questions, answer tracking,
+            and visual feedback.
+          </p>
+          <a href="app.html" class="btn btn-custom">Play Game</a>
         </div>
       </div>
 
@@ -74,14 +145,14 @@
 
   <!-- RESUME -->
   <div class="container section">
-    <h2>Resume</h2>
-    <p>You can view my resume below.</p>
-    <a href="resume.html" class="btn btn-dark">View Resume</a>
+    <h2>Résumé</h2>
+    <p>View my professional résumé built entirely in HTML.</p>
+    <a href="resume.html" class="btn btn-dark">View Résumé</a>
   </div>
 
   <!-- FOOTER -->
-  <footer class="text-center p-4 bg-light">
-    <p>© 2026 Palmer Rasmussen</p>
+  <footer>
+    © 2026 Palmer Rasmussen
   </footer>
 
 </body>
