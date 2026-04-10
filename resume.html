@@ -4,210 +4,220 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Palmer Rasmussen | Résumé</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     body {
       background-color: #f4f7f2;
       font-family: Arial, Helvetica, sans-serif;
       color: #1b2a1f;
+      margin: 0;
     }
 
-    .resume-header {
-      background: linear-gradient(to right, #17361f, #2f7a38);
+    .header {
+      background: linear-gradient(to right, #102a16, #2f7a38);
       color: white;
       padding: 60px 20px;
     }
 
-    .resume-header h1 {
-      font-size: 2.7rem;
+    .header h1 {
       font-weight: 800;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .resume-header p {
-      margin: 0;
+    .header p {
+      margin-bottom: 18px;
       font-size: 1.05rem;
-      opacity: 0.95;
     }
 
-    .resume-wrapper {
-      max-width: 980px;
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid white;
+      margin-bottom: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      display: inline-block;
+    }
+
+    .links a:hover {
+      background: rgba(255,255,255,0.25);
+      color: white;
+    }
+
+    .resume-box {
+      max-width: 950px;
       margin: 40px auto;
       background: white;
-      border-radius: 24px;
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.10);
     }
 
-    .resume-content {
-      padding: 40px 34px;
-    }
-
-    .section-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #1a3a22;
-      margin-top: 24px;
+    h2 {
+      margin-top: 30px;
       margin-bottom: 14px;
-      border-bottom: 2px solid #dfe9df;
-      padding-bottom: 8px;
+      font-weight: 800;
+      border-bottom: 2px solid #e0e6df;
+      padding-bottom: 6px;
+      color: #17301d;
     }
 
-    .entry {
-      margin-bottom: 22px;
-    }
-
-    .entry h3 {
-      font-size: 1.08rem;
+    .job-title {
       font-weight: 700;
+      margin-top: 18px;
       margin-bottom: 4px;
     }
 
-    .entry .sub {
-      color: #58705f;
-      font-weight: 600;
+    .job-subtitle {
+      color: #4f6655;
       margin-bottom: 8px;
     }
 
-    .entry ul {
-      margin-bottom: 0;
+    ul {
       padding-left: 20px;
+      margin-bottom: 0;
     }
 
-    .entry li {
+    li {
       margin-bottom: 8px;
-      line-height: 1.7;
+      line-height: 1.6;
     }
 
-    .top-links a {
-      text-decoration: none;
-      font-weight: 700;
-      color: white;
-      background-color: rgba(255, 255, 255, 0.14);
-      padding: 10px 16px;
-      border-radius: 999px;
-      margin-right: 8px;
+    .skills span {
       display: inline-block;
-      margin-top: 12px;
-    }
-
-    .top-links a:hover {
-      background-color: rgba(255, 255, 255, 0.22);
-      color: white;
-    }
-
-    .skills-list span {
-      display: inline-block;
-      background-color: #e4f2e6;
-      color: #215228;
+      background: #e4f2e6;
       padding: 8px 12px;
       border-radius: 999px;
-      margin: 6px 8px 0 0;
+      margin: 5px;
       font-weight: 700;
-      font-size: 0.95rem;
+      color: #215228;
+    }
+
+    @media (max-width: 768px) {
+      .resume-box {
+        margin: 20px 12px;
+        padding: 24px;
+      }
+
+      .links a {
+        margin-top: 8px;
+      }
     }
   </style>
 </head>
 <body>
-  <header class="resume-header">
-    <div class="container">
+
+  <div class="header">
+    <div class="container text-center">
+      <img src="profile.jpg" alt="Palmer Rasmussen" class="profile-pic">
+
       <h1>Palmer Rasmussen</h1>
-      <p>Student | Business Analytics | Strategy | Technology</p>
-      <div class="top-links">
+      <p>Second-Year Student | Marketing | Business Analytics</p>
+
+      <div class="links">
         <a href="index.html">Home</a>
         <a href="scratch.html">Masters Page</a>
         <a href="app.html">Trivia Game</a>
       </div>
     </div>
-  </header>
-
-  <div class="resume-wrapper">
-    <div class="resume-content">
-      <section>
-        <h2 class="section-title">Profile</h2>
-        <p style="line-height: 1.8; color: #445a49;">
-          Motivated student with interests in business analytics, marketing, digital strategy, and
-          technology-driven problem solving. Experienced in building clear presentations, organizing
-          data, and creating polished deliverables that combine analysis with strong communication.
-        </p>
-      </section>
-
-      <section>
-        <h2 class="section-title">Education</h2>
-        <div class="entry">
-          <h3>Brigham Young University</h3>
-          <div class="sub">Current Student</div>
-          <ul>
-            <li>Coursework and projects in analytics, business applications, and communication.</li>
-            <li>Experience creating structured reports, presentations, and web-based assignments.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="section-title">Experience</h2>
-        <div class="entry">
-          <h3>Marketing and Project Work</h3>
-          <div class="sub">Student / Internship-Style Project Experience</div>
-          <ul>
-            <li>Helped develop campaign ideas, content strategy, and deliverables for marketing-focused projects.</li>
-            <li>Worked on presentation materials, messaging, and visual organization for client-facing work.</li>
-            <li>Used data and audience thinking to support creative decisions and improve communication.</li>
-          </ul>
-        </div>
-
-        <div class="entry">
-          <h3>Academic Project Development</h3>
-          <div class="sub">Course and Independent Work</div>
-          <ul>
-            <li>Built spreadsheets, reports, and structured written assignments with attention to clarity and detail.</li>
-            <li>Created web pages using HTML, CSS, Bootstrap, and JavaScript for class projects.</li>
-            <li>Practiced organizing information into clean, user-friendly formats for both analysis and presentation.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="section-title">Skills</h2>
-        <div class="skills-list">
-          <span>HTML</span>
-          <span>CSS</span>
-          <span>Bootstrap</span>
-          <span>JavaScript</span>
-          <span>Excel</span>
-          <span>Data Analysis</span>
-          <span>Presentation Design</span>
-          <span>Research</span>
-          <span>Written Communication</span>
-          <span>Project Organization</span>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="section-title">Leadership & Involvement</h2>
-        <div class="entry">
-          <ul>
-            <li>Participated in team-based class and project environments requiring collaboration and accountability.</li>
-            <li>Developed stronger communication and organizational skills through academic and service-oriented work.</li>
-            <li>Enjoy working on projects that balance creativity, analysis, and execution.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="section-title">Awards / Strengths</h2>
-        <div class="entry">
-          <ul>
-            <li>Strong presentation sense with a focus on readability, structure, and polished visual output.</li>
-            <li>Comfortable taking a project from rough concept to final organized deliverable.</li>
-            <li>Detail-oriented and quick to revise work to better match audience or rubric expectations.</li>
-          </ul>
-        </div>
-      </section>
-    </div>
   </div>
+
+  <div class="resume-box">
+    <h2>Profile</h2>
+    <p>
+      Second-year student at Brigham Young University studying marketing with strong interests in
+      business analytics, digital strategy, and content-driven growth. Experienced in building
+      marketing campaigns, analyzing engagement data, and creating polished deliverables that combine
+      creativity with structured thinking.
+    </p>
+
+    <h2>Education</h2>
+    <div class="job-title">Brigham Young University</div>
+    <div class="job-subtitle">Marketing | Current Second-Year Student</div>
+
+    <div class="job-title">Southern Virginia University</div>
+    <div class="job-subtitle">One Year Study | General Education</div>
+
+    <div class="job-title">Lake Travis High School</div>
+    <div class="job-subtitle">High School Diploma</div>
+
+    <h2>Experience</h2>
+
+    <div class="job-title">Marketing Project – STAR360 Feedback</div>
+    <div class="job-subtitle">Marketing Strategy and Campaign Development</div>
+    <ul>
+      <li>Developed social media marketing strategy focused on expanding Instagram presence for a leadership development and 360-feedback platform.</li>
+      <li>Created campaign ideas, reel scripts, carousel concepts, and messaging tailored to HR leaders, executive coaches, and business audiences.</li>
+      <li>Helped shape full-funnel content strategy including awareness, engagement, and conversion-oriented messaging.</li>
+      <li>Worked on positioning and brand messaging, including content tied to the phrase “Transforming Feedback Into Action.”</li>
+      <li>Analyzed marketing performance ideas and audience engagement metrics such as click-through rate, interaction rate, and campaign targeting.</li>
+    </ul>
+
+    <div class="job-title">Volunteer Service Missionary</div>
+    <div class="job-subtitle">Church | Boise, Idaho | 2022–2024</div>
+    <ul>
+      <li>Built lasting relationships with community members through empathy, communication, and consistent service.</li>
+      <li>Prepared and delivered presentations in both group and one-on-one settings.</li>
+      <li>Developed strong communication skills by working with diverse individuals in a variety of settings.</li>
+      <li>Established trust through regular engagement, support, and service-oriented outreach.</li>
+      <li>Supported families during difficult situations and connected individuals with additional resources when needed.</li>
+    </ul>
+
+    <div class="job-title">Athletic Director</div>
+    <div class="job-subtitle">Aurora Academy Charter School | 2020–2021</div>
+    <ul>
+      <li>Managed athletic equipment, facility operations, and school activity logistics.</li>
+      <li>Taught physical education classes focused on movement, exercise, and safety.</li>
+      <li>Evaluated student performance and provided structured feedback to encourage improvement.</li>
+      <li>Promoted healthy lifestyle choices through physical activity and instruction.</li>
+    </ul>
+
+    <div class="job-title">Athletic Trainer</div>
+    <div class="job-subtitle">Palmer Performance | 2020</div>
+    <ul>
+      <li>Created and implemented strength and conditioning programs for athletes.</li>
+      <li>Motivated clients to stay on track with personal fitness goals through accountability and encouragement.</li>
+      <li>Assisted clients with training in strength work, cardio, and stretching routines.</li>
+      <li>Built positive rapport with athletes and clients through a supportive coaching approach.</li>
+    </ul>
+
+    <h2>Skills</h2>
+    <div class="skills">
+      <span>Marketing Strategy</span>
+      <span>Social Media Campaigns</span>
+      <span>Business Analytics</span>
+      <span>Data Analysis</span>
+      <span>Excel</span>
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JavaScript</span>
+      <span>Presentation Design</span>
+      <span>Communication</span>
+      <span>Project Organization</span>
+      <span>Creativity and Innovation</span>
+    </div>
+
+    <h2>Achievements</h2>
+    <ul>
+      <li>Academic All-Conference both semesters at Southern Virginia University.</li>
+      <li>President’s List and Provost’s List both semesters at Southern Virginia University.</li>
+      <li>Collegiate track athlete at the Division III level in indoor and outdoor track.</li>
+      <li>Integral part of indoor and outdoor conference championship teams.</li>
+      <li>Three-sport letterman in football, wrestling, and track at Lake Travis High School.</li>
+    </ul>
+  </div>
+
 </body>
 </html>
