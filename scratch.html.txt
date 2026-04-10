@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golf Basics and Improvement</title>
+  <link rel="stylesheet" href="scratch.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    
+    <div class="hero-box">
+      <h1 id="top">Golf Basics and Improvement</h1>
+      <p class="intro-text">
+        Golf is one of my favorite sports because it is relaxing, competitive, and always gives you something to improve.
+        Even when your round does not go perfectly, there is always another shot to figure out and another skill to work on.
+      </p>
+
+      <div class="nav-links">
+        <a href="index.html">Back to Professional Pages</a>
+        <a href="app.html">Try My Golf Practice App</a>
+        <a href="#stats">Jump to Golf Stats</a>
+      </div>
+    </div>
+
+    <div class="content-box">
+      <h2>Why I Like Golf</h2>
+      <p>
+        What I like most about golf is that it mixes patience, skill, and strategy. A good round is not just about power.
+        It is also about staying calm, making smart decisions, and being consistent. Golf is also fun because you can play
+        competitively or just enjoy being outside with friends.
+      </p>
+
+      <img
+        src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=1200&q=80"
+        alt="Golf course in the evening"
+        class="feature-image"
+      />
+    </div>
+
+    <div class="content-box">
+      <h2>How to Get Better at Golf</h2>
+      <p>
+        One of the best parts of golf is that there are a lot of different ways to improve. Here is a simple improvement plan:
+      </p>
+
+      <ol class="tips-list">
+        <li>
+          Build strong fundamentals
+          <ul>
+            <li>Practice your grip</li>
+            <li>Focus on alignment</li>
+            <li>Keep a balanced stance</li>
+          </ul>
+        </li>
+        <li>
+          Spend time on short game
+          <ul>
+            <li>Work on chipping</li>
+            <li>Practice putting distance control</li>
+            <li>Learn basic bunker shots</li>
+          </ul>
+        </li>
+        <li>
+          Practice with purpose
+          <ul>
+            <li>Do not just hit random balls at the range</li>
+            <li>Set goals for each practice session</li>
+            <li>Track what part of your game needs the most help</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <div class="content-box">
+      <h2>Golf Video I Like</h2>
+      <p>
+        This embedded YouTube video is a good example of the kind of golf content that can help players improve.
+      </p>
+
+      <div class="video-box">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/9E-gdx-o1sg"
+          title="YouTube golf video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div class="content-box" id="stats">
+      <h2>Golf Stats and Data</h2>
+      <p>
+        Stats are a huge part of modern golf. This Tableau visualization adds a live and interactive data feature to the page.
+      </p>
+
+      <div class='tableauPlaceholder' id='viz1744310000000' style='position: relative'>
+        <noscript>
+          <a href='#'>
+            <img alt='Tableau Golf Visualization'
+              src='https://public.tableau.com/static/images/Wo/WorldRankingsofGolfers/GolfersWorldRankings/1_rss.png'
+              style='border: none' />
+          </a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
+          <param name='name' value='WorldRankingsofGolfers/GolfersWorldRankings' />
+          <param name='tabs' value='no' />
+          <param name='toolbar' value='yes' />
+          <param name='static_image'
+            value='https://public.tableau.com/static/images/Wo/WorldRankingsofGolfers/GolfersWorldRankings/1.png' />
+          <param name='animate_transition' value='yes' />
+          <param name='display_static_image' value='yes' />
+          <param name='display_spinner' value='yes' />
+          <param name='display_overlay' value='yes' />
+          <param name='display_count' value='yes' />
+          <param name='language' value='en-US' />
+        </object>
+      </div>
+
+      <script type='text/javascript'>
+        var divElement = document.getElementById('viz1744310000000');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        vizElement.style.width = '100%';
+        vizElement.style.height = '700px';
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      </script>
+    </div>
+
+    <div class="content-box">
+      <h2>More Golf Links</h2>
+      <p>
+        Want to keep exploring?
+      </p>
+      <div class="nav-links">
+        <a href="app.html">Open the Golf Practice Plan Generator</a>
+        <a href="#top">Back to Top</a>
+        <a href="index.html">Return to Home Page</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
