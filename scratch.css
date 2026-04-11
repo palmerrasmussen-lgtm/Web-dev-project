@@ -7,7 +7,6 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: #1f2d1f;
-
   background:
     linear-gradient(rgba(10, 34, 18, 0.45), rgba(10, 34, 18, 0.45)),
     url("mastersbackground.jpg")
@@ -74,19 +73,26 @@ body {
   font-size: 1.7rem;
 }
 
+.content-box p {
+  line-height: 1.8;
+}
+
 .image-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+  align-items: center;
 }
 
 .feature-image {
   width: 100%;
   border-radius: 18px;
+  display: block;
 }
 
 .tips-list {
   padding-left: 22px;
+  line-height: 1.9;
 }
 
 .nav-links {
@@ -108,25 +114,47 @@ body {
   width: 100%;
   max-width: 800px;
   margin: auto;
+  aspect-ratio: 16 / 9;
 }
 
 .video-box iframe {
   width: 100%;
-  height: 400px;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
-/* ✅ TABLEAU FIX */
 .tableau-wrapper {
   width: 100%;
   margin-top: 20px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
 }
 
-.tableau-frame {
+.tableauPlaceholder {
   width: 100%;
-  height: 800px;
-  border: none;
+  min-height: 900px;
+}
+
+.tableauViz {
+  width: 100%;
 }
 
 .footer-links {
   text-align: center;
+}
+
+@media (max-width: 900px) {
+  .image-section {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-overlay {
+    padding: 40px 22px;
+  }
+
+  .tableauPlaceholder {
+    min-height: 700px;
+  }
 }
