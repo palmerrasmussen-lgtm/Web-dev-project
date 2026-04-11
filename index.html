@@ -1,251 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Palmer Rasmussen | Portfolio</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
-    :root {
-      --masters-green: #12361f;
-      --masters-green-2: #2f7a38;
-      --masters-gold: #c8a96b;
-      --masters-cream: #fbf8ef;
-      --masters-text: #1f2a22;
-    }
-
     body {
-      background:
-        linear-gradient(rgba(10, 34, 18, 0.45), rgba(10, 34, 18, 0.45)),
-        url("augusta.jpg") center/cover fixed no-repeat;
-      color: var(--masters-text);
+      margin: 0;
       font-family: Arial, Helvetica, sans-serif;
+
+      background:
+        linear-gradient(rgba(10,34,18,0.45), rgba(10,34,18,0.45)),
+        url("homebackground.jpg") center/cover fixed no-repeat;
     }
 
-    .navbar {
-      background: rgba(18, 54, 31, 0.95);
-      backdrop-filter: blur(6px);
-    }
-
-    .navbar-brand,
-    .nav-link {
-      color: white !important;
-      font-weight: 700;
+    .wrapper {
+      width: min(94%, 1100px);
+      margin: 30px auto;
     }
 
     .hero {
-      width: min(94%, 1150px);
-      margin: 28px auto 24px;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
       background:
-        linear-gradient(rgba(20, 60, 30, 0.84), rgba(20, 60, 30, 0.84)),
-        url("augusta.jpg") center/cover no-repeat;
+        linear-gradient(rgba(20,60,30,0.85), rgba(20,60,30,0.85)),
+        url("homebackground.jpg") center/cover;
       color: white;
+      padding: 70px 30px;
+      border-radius: 25px;
       text-align: center;
-      padding: 64px 28px;
+      box-shadow: 0 18px 36px rgba(0,0,0,0.2);
+      margin-bottom: 25px;
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-size: 2.8rem;
       font-weight: 800;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
     .hero p {
-      max-width: 760px;
-      margin: 0 auto;
-      line-height: 1.8;
-      font-size: 1.05rem;
-      color: #eef6ef;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      line-height: 1.7;
+      color: #e7f5e7;
     }
 
-    .hero-buttons {
-      margin-top: 22px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .btn-custom {
-      display: inline-block;
-      padding: 11px 18px;
-      background: var(--masters-green-2);
+    .hero-buttons a {
+      margin: 5px;
+      padding: 12px 18px;
+      background: #2f7a38;
       color: white;
       text-decoration: none;
       border-radius: 999px;
-      font-weight: 700;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .hero-buttons a:hover {
+      background: #245e2c;
+      transform: translateY(-2px);
+    }
+
+    .section {
+      background: rgba(255,255,255,0.96);
+      padding: 25px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .section h2 {
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #12361f;
+    }
+
+    .card {
+      border-radius: 20px;
+      overflow: hidden;
       border: none;
-      transition: transform 0.18s ease, background 0.18s ease;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    }
+
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .btn-custom {
+      background: #2f7a38;
+      color: white;
+      border-radius: 999px;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-weight: bold;
     }
 
     .btn-custom:hover {
       background: #245e2c;
       color: white;
-      transform: translateY(-2px);
-    }
-
-    .content-section {
-      width: min(94%, 1150px);
-      margin: 0 auto 24px;
-      background: rgba(255, 255, 255, 0.97);
-      padding: 30px;
-      border-radius: 20px;
-      border: 1px solid #dbe6db;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
-    }
-
-    .section-title {
-      font-size: 1.9rem;
-      font-weight: 800;
-      color: #17301d;
-      margin-bottom: 14px;
-    }
-
-    .section-text {
-      color: #334638;
-      line-height: 1.8;
-      margin-bottom: 0;
-    }
-
-    .project-card {
-      border: 1px solid #e3e9e1;
-      border-radius: 18px;
-      overflow: hidden;
-      background: white;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
-      height: 100%;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.10);
-    }
-
-    .project-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .project-card-body {
-      padding: 22px;
-    }
-
-    .project-tag {
-      display: inline-block;
-      margin-bottom: 10px;
-      padding: 6px 11px;
-      border-radius: 999px;
-      background: #e7f1e7;
-      color: #215228;
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    .project-card h3 {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #17301d;
-    }
-
-    .project-card p {
-      color: #46594a;
-      line-height: 1.75;
-      margin-bottom: 18px;
-    }
-
-    .resume-box {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
     }
 
     footer {
-      width: min(94%, 1150px);
-      margin: 0 auto 30px;
       text-align: center;
       color: white;
-      background: rgba(18, 54, 31, 0.95);
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.10);
-    }
-
-    @media (max-width: 768px) {
-      .hero,
-      .content-section,
-      footer {
-        width: 95%;
-      }
-
-      .hero {
-        padding: 46px 20px;
-      }
-
-      .content-section {
-        padding: 22px;
-      }
-
-      .project-card img {
-        height: 200px;
-      }
+      padding: 15px;
+      background: rgba(18,54,31,0.9);
+      border-radius: 15px;
     }
   </style>
 </head>
+
 <body>
 
-  <nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Palmer Rasmussen</a>
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="scratch.html">Masters Page</a>
-        <a class="nav-link" href="app.html">Trivia Game</a>
-        <a class="nav-link" href="resume.html">Résumé</a>
-      </div>
-    </div>
-  </nav>
+<div class="wrapper">
 
-  <header class="hero">
-    <h1>Professional Portfolio</h1>
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Palmer Rasmussen</h1>
     <p>
-      A custom web project centered on the Masters Tournament, featuring a themed tournament page,
-      an interactive trivia game, and a résumé built entirely in HTML.
+      A Masters-themed web project featuring a custom tournament page,
+      an interactive trivia app, and a professionally structured résumé.
     </p>
+
     <div class="hero-buttons">
-      <a href="scratch.html" class="btn-custom">Masters Page</a>
-      <a href="app.html" class="btn-custom">Play Trivia</a>
-      <a href="resume.html" class="btn-custom">View Résumé</a>
+      <a href="scratch.html">Masters Page</a>
+      <a href="app.html">Play Trivia</a>
+      <a href="resume.html">View Résumé</a>
     </div>
-  </header>
+  </div>
 
-  <section class="content-section">
-    <h2 class="section-title">About Me</h2>
-    <p class="section-text">
-      I am a second-year student at Brigham Young University studying marketing with interests in
-      business analytics, digital strategy, and creative problem solving. This site highlights both
-      professional design and hands-on work in HTML, CSS, and JavaScript.
+  <!-- ABOUT -->
+  <div class="section">
+    <h2>About Me</h2>
+    <p>
+      I am a second-year marketing student at Brigham Young University with interests in
+      business analytics, digital strategy, and creative problem solving. This project
+      highlights my ability to design, build, and connect multiple web pages into a
+      cohesive experience.
     </p>
-  </section>
+  </div>
 
-  <section class="content-section">
-    <h2 class="section-title">Featured Projects</h2>
+  <!-- PROJECTS -->
+  <div class="section">
+    <h2>Projects</h2>
+
     <div class="row g-4">
+
       <div class="col-md-6">
-        <div class="project-card">
-          <img src="masters.jpg" alt="Masters Tournament page preview">
-          <div class="project-card-body">
-            <span class="project-tag">Custom HTML + CSS</span>
-            <h3>Masters Tournament Page</h3>
+        <div class="card">
+          <img src="masters.jpg">
+          <div class="p-3">
+            <h4>Masters Tournament Page</h4>
             <p>
-              A themed page exploring the history, traditions, visuals, and atmosphere of the Masters,
-              including an embedded video and live Tableau visualization.
+              Custom-built page with video, styling, structured content, and
+              an interactive Tableau visualization.
             </p>
             <a href="scratch.html" class="btn-custom">Open Page</a>
           </div>
@@ -253,39 +167,35 @@
       </div>
 
       <div class="col-md-6">
-        <div class="project-card">
-          <img src="augusta.jpg" alt="Masters Trivia Game preview">
-          <div class="project-card-body">
-            <span class="project-tag">Interactive JavaScript App</span>
-            <h3>Masters Trivia Game</h3>
+        <div class="card">
+          <img src="triviabackground.jpg">
+          <div class="p-3">
+            <h4>Masters Trivia Game</h4>
             <p>
-              A quiz app built with HTML, CSS, and JavaScript that rotates questions, avoids repeating
-              the previous round, and gives instant answer feedback.
+              JavaScript-powered quiz with 100 questions, randomized gameplay,
+              and non-repeating logic.
             </p>
             <a href="app.html" class="btn-custom">Play Game</a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="content-section">
-    <div class="resume-box">
-      <div>
-        <h2 class="section-title">Résumé</h2>
-        <p class="section-text">
-          View my résumé with education, experience, skills, and project work presented in a clean HTML format.
-        </p>
-      </div>
-      <div>
-        <a href="resume.html" class="btn-custom">View Résumé</a>
-      </div>
     </div>
-  </section>
+  </div>
 
+  <!-- RESUME -->
+  <div class="section">
+    <h2>Résumé</h2>
+    <p>View my experience, skills, and academic background.</p>
+    <a href="resume.html" class="btn-custom">View Résumé</a>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
     © 2026 Palmer Rasmussen
   </footer>
+
+</div>
 
 </body>
 </html>
