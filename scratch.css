@@ -7,6 +7,7 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: #1f2d1f;
+
   background:
     linear-gradient(rgba(10, 34, 18, 0.45), rgba(10, 34, 18, 0.45)),
     url("mastersbackground.jpg")
@@ -73,128 +74,59 @@ body {
   font-size: 1.7rem;
 }
 
-.content-box p {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #334638;
-}
-
 .image-section {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
-  align-items: center;
 }
 
 .feature-image {
   width: 100%;
-  display: block;
   border-radius: 18px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
 }
 
 .tips-list {
   padding-left: 22px;
-  line-height: 1.9;
-  color: #2e4232;
-}
-
-.tips-list ul {
-  margin-top: 8px;
 }
 
 .nav-links {
-  margin-top: 22px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  margin-top: 20px;
+  text-align: center;
 }
 
 .nav-links a {
-  display: inline-block;
-  padding: 11px 18px;
+  padding: 10px 15px;
   background: #2f7a38;
   color: white;
   text-decoration: none;
   border-radius: 999px;
-  font-weight: 700;
-  transition: transform 0.18s ease, background 0.18s ease;
-}
-
-.nav-links a:hover {
-  background: #245e2c;
-  transform: translateY(-2px);
+  margin: 5px;
+  display: inline-block;
 }
 
 .video-box {
-  position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 18px auto 0;
-  aspect-ratio: 16 / 9;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+  max-width: 800px;
+  margin: auto;
 }
 
 .video-box iframe {
   width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
+  height: 400px;
 }
 
+/* ✅ TABLEAU FIX */
 .tableau-wrapper {
   width: 100%;
-  margin-top: 18px;
-  overflow: hidden;
-  border-radius: 18px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
-  background: #fff;
+  margin-top: 20px;
 }
 
 .tableau-frame {
   width: 100%;
-  height: 900px;
-  border: 0;
-  display: block;
+  height: 800px;
+  border: none;
 }
 
 .footer-links {
   text-align: center;
-}
-
-@media (max-width: 900px) {
-  .image-section {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-overlay {
-    padding: 40px 22px;
-  }
-
-  .content-box {
-    padding: 22px;
-  }
-
-  .tableau-frame {
-    height: 700px;
-  }
-}
-
-@media (max-width: 600px) {
-  .page-wrapper {
-    width: 95%;
-    margin-top: 16px;
-  }
-
-  .nav-links a {
-    width: 100%;
-    text-align: center;
-  }
-
-  .tableau-frame {
-    height: 620px;
-  }
 }
